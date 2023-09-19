@@ -1,5 +1,14 @@
 exports.Book = class Book {
-  constructor(id, title, isbn, description, publisher, author, pages) {
+  constructor(
+    id,
+    title,
+    isbn,
+    description,
+    publisher,
+    author,
+    pages,
+    store_code
+  ) {
     this.id = id;
     this.title = title;
     this.isbn = isbn;
@@ -7,5 +16,6 @@ exports.Book = class Book {
     this.publisher = publisher;
     this.author = author;
     this.pages = pages;
+    this.store_code = store_code;
   }
 };
