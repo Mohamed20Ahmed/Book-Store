@@ -1,32 +1,19 @@
-//import express to use it in creating server
 const express = require("express");
-
-//create express server
 const app = express();
-
-//import cors for parsing url
 const cors = require("cors");
-
-//import body-parser for parsing json and url-encoded
 const bodyparser = require("body-parser");
+const storeRouter = require("./Router/storeRouter");
+const dotenv = require("dotenv");
 
-//import noteRouter
-const noteRouter = require("./router/noteRouter");
+dotenv.config();
 
-//initialize port number
-const port = 3000;
-
-//use body-parser for parsing json and url-encoded
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
-//use cors
 app.use(cors());
 
-//routing
-app.use("/note-app", noteRouter);
+app.use("/book-store", storeRouter);
 
-//listening on port 3000
-app.listen(port, () => {
-  console.log("listening on port 3000");
+app.listen(process.env.PORT, () => {
+  console.log("listening on port " + process.env.PORT);
 });
