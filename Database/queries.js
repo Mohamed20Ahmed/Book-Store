@@ -8,5 +8,7 @@ exports.queryList = {
     'SELECT * FROM "book-store".book INNER JOIN "book-store".store ON store_code = code WHERE book.id = $1',
   ADD_BOOK_QUERY:
     'INSERT INTO "book-store".book (title, isbn, description, publisher, author, pages, store_code) VALUES($1,$2,$3,$4,$5,$6,$7)',
-  UPDATE_BOOK_QUERY: `UPDATE "book-store".book SET title=$1 , isbn=$2 , description=$3 , publisher=$4 , author=$5 , pages=$6 , store_code=$7 WHERE id=$8`,
+  UPDATE_BOOK_QUERY:
+    'UPDATE "book-store".book SET title=$1 , isbn=$2 , description=$3 , publisher=$4 , author=$5 , pages=$6 , store_code=$7 WHERE id=$8',
+  DELETE_BOOK_QUERY: 'DELETE FROM "book-store".book WHERE id=$1',
 };

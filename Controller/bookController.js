@@ -108,3 +108,20 @@ exports.updateBook = async (req, res) => {
     return res.status(500).send({ error: "Error updating book" });
   }
 };
+
+exports.deleteBook = async (req, res) => {
+  try {
+    let bookId = req.body.id;
+    if (!bookId) {
+      return res.status(404).send({ error: "Please enter id" });
+    }
+    let deleteBookQuery = queries.queryList.DELETE_BOOK_QUERY;
+    let result = await dbConnection.dbQuery(deleteBookQuery, [bookId]);
+    if (result.rowCount === 0)
+      return res.status(404).send({ error: "This id is not exist" });
+    res.status(200).send("Book deleted successfully");
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ error: "Error deleting book" });
+  }
+};
