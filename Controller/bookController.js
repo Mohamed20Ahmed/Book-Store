@@ -65,3 +65,46 @@ exports.addBook = async (req, res) => {
     return res.status(500).send({ error: "Error adding book" });
   }
 };
+
+exports.updateBook = async (req, res) => {
+  try {
+    let book = new Book(
+      req.body.id,
+      req.body.title,
+      req.body.isbn,
+      req.body.description,
+      req.body.publisher,
+      req.body.author,
+      req.body.pages,
+      req.body.store_code
+    );
+
+    if (
+      !book.id ||
+      !book.title ||
+      !book.isbn ||
+      !book.description ||
+      !book.publisher ||
+      !book.author ||
+      !book.pages ||
+      !book.store_code
+    ) {
+      return res.status(404).send({ error: "Please enter all fields" });
+    }
+    let updateBookQuery = queries.queryList.UPDATE_BOOK_QUERY;
+    await dbConnection.dbQuery(updateBookQuery, [
+      book.title,
+      book.isbn,
+      book.description,
+      book.publisher,
+      book.author,
+      book.pages,
+      book.store_code,
+      book.id,
+    ]);
+    res.status(200).send("Book updated successfully");
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ error: "Error updating book" });
+  }
+};
